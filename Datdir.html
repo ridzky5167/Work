@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <link rel="stylesheet" href="Stylesheet.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Tugas Pak Wildan - Modern</title>
+ </head>
+<body>
+  <h1>Form Biodata</h1>
+
+  <form id="biodataForm">
+    <input type="text" id="nama" placeholder="Masukkan Nama" required />
+    <input type="number" id="umur" placeholder="Masukkan Umur" required />
+    <input type="email" id="email" placeholder="Masukkan Email" required />
+    <textarea id="alamat" placeholder="Masukkan Alamat" required></textarea>
+    <button type="submit">Kirim</button>
+  </form>
+
+  <div id="hasil"></div>
+
+  <script>
+    // tunggu DOM siap
+    document.addEventListener('DOMContentLoaded', () => {
+      const form = document.getElementById('biodataForm');
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const nama = document.getElementById('nama').value.trim();
+        const umur = document.getElementById('umur').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const alamat = document.getElementById('alamat').value.trim();
+
+        const hasilDiv = document.getElementById('hasil');
+        // escape sederhana agar user input tidak menjalankan HTML
+        const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+        hasilDiv.innerHTML = `
+          <p><strong>Nama:</strong> ${esc(nama)}</p>
+          <p><strong>Umur:</strong> ${esc(umur)}</p>
+          <p><strong>Email:</strong> ${esc(email)}</p>
+          <p><strong>Alamat:</strong> ${esc(alamat)}</p>
+        `;
+      });
+    });
+  </script>
+</body>
+</html>
